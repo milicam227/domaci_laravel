@@ -18,7 +18,6 @@ class CreateRecipesTable extends Migration
             $table->string('title');
             $table->string('body');
             $table->timestamps();
-            
             $table->foreignId('category_id');
         });
     }

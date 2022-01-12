@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         $cat1=\App\Models\Category::create(['name'=>"salty"]);
         $cat2=\App\Models\Category::create(['name'=>"sweet"]);
         
-        $ing1=\App\Models\Ingredient::create(['name'=>"list1",'amount'=>'5']);
-        $ing2=\App\Models\Ingredient::create(['name'=>"list2",'amount'=>'2']);
-        $ing3=\App\Models\Ingredient::create(['name'=>"list3",'amount'=>'3']);
+        $ing1=\App\Models\Ingredient::create(['list'=>"list1",'items'=>'suggar,flour,chocolate,egg']);
+        $ing2=\App\Models\Ingredient::create(['list'=>"list2",'items'=>'oil,flour,water,egg']);
+        $ing3=\App\Models\Ingredient::create(['list'=>"list3",'items'=>'flour,salt,oil']);
 
         
         $rec1=\App\Models\Recipe::create([
