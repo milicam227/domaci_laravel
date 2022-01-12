@@ -13,6 +13,7 @@ class RecipeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
+        
     }
 }
