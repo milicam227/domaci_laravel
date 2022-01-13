@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
@@ -36,7 +38,30 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            
+
+            'title'=>'string|max:255',
+            'body'=>'string|max:255',
+            'category_id'=>'string',
+            'ingredients_id'=>'string'
+        ]);
+
+        if($validator->fails())
+            return response()->json($validator->errors());
+
+
+            $recipe=\App\Models\Recipe::create([
+
+                'title'=>$request->title,
+                'body'=>$request->body,
+                'category_id'=>$request->category_id,
+                'ingredients_id'=>$request->ingredients_id,
+                'user_id'=>Auth::user()->id,
+            ]);
+
+
+        return response()->json(['Recipe successfully created.', new \App\Http\Resources\RecipeResource($recipe)]);
     }
 
     /**
@@ -70,8 +95,8 @@ class RecipeController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        //
-    }
+       
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -81,6 +106,7 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        //
+        $recipe->delete();
+        return response()->json('Recipe deleted successfully');
     }
 }

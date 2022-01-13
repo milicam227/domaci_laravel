@@ -24,3 +24,17 @@ Route::resource('/recipes','App\Http\Controllers\RecipeController');
 Route::post('/register','App\Http\Controllers\API\AuthController@register');
 Route::post('/login','App\Http\Controllers\API\AuthController@login');
 
+
+
+Route::group(['middleware'=>['auth:sanctum']], function(){
+    Route::get('/profile', function(Request $request){
+        return auth()->user();
+    });
+
+    Route::resource('/recipe', \App\Http\Controllers\RecipeController::class)->only(['store','destroy']);
+    Route::post('/logout','App\Http\Controllers\API\AuthController@logout');
+
+
+});
+
+Route::resource('recipes', \App\Http\RecipeController::class)->only(['index']);
